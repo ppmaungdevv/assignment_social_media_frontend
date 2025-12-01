@@ -14,7 +14,7 @@ export const registrationSchema = z.object({
     
   password: z
     .string()
-    .min(8, { message: "Required password" }),
+    .min(8, { message: "Password must be at least 8 character" }),
   
   profile_pic_url: z
     .string(),
