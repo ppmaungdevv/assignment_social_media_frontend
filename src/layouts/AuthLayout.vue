@@ -18,7 +18,7 @@ const current_tab = ref('login')
 <template>
   <div class="auth-layout">
     
-    <main class="flex justify-center items-center bg-red-100 w-svw h-svh">
+    <main class="flex justify-center items-center bg-red-100 w-svw min-h-svh">
       <div class="md:w-1/3 h-2/3 w-full">
         <!-- tab bar -->
         <div class="flex items-center w-full bg-gray-300/50 p-1 rounded-full mb-5">
