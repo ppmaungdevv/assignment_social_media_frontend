@@ -41,7 +41,7 @@ const current_tab = ref('login')
 
         <div class="w-full bg-white/60 text-gray-400/90 font-semibold rounded-lg text-center mt-6 p-10">
           <p>Demo account for testing:</p>
-          <p>Email: demo@example.com. Password: demo123</p>
+          <p>Email: demo@example.com. Password: demo1234</p>
         </div>
       </div>
     </main>
