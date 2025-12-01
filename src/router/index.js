@@ -19,4 +19,19 @@ const router = createRouter({
   routes,
 })
 
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  
+  const isAuthenticated = localStorage.getItem('auth_token'); 
+
+  if (requiresAuth && !isAuthenticated) {
+    next({ 
+      name: 'auth', 
+      query: { redirect: to.fullPath }
+    });
+  } else {
+    next(); 
+  }
+});
+
 export default router
