@@ -2,7 +2,8 @@ import axios from 'axios';
 
 // Create a new instance of Axios
 const api = axios.create({
-  baseURL: 'https://lynette-ratable-nonaristocratically.ngrok-free.dev/api/', 
+  // baseURL: 'https://lynette-ratable-nonaristocratically.ngrok-free.dev/api/', 
+  baseURL: 'https://lynette-ratable-nonaristocratically.ngrok-free.dev',
   // baseURL: 'http://localhost:5174/api/', 
   timeout: 5000, // Timeout after 5 seconds
   headers: {
