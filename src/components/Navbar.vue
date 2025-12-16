@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import api from '@/http/axios'
 import { useRouter } from 'vue-router'
+import { auth_apis } from '../http/apis/auth';
+
 // 1. Import the necessary Font Awesome Component and Function
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -18,7 +20,7 @@ const router = useRouter()
 const user_name = ref(localStorage.getItem('user_name'))
 
 const logout = async () => {
-  const { data } = await api.post('logout')
+  const { data } = await api.post(auth_apis.logout)
   localStorage.clear()
   await router.push('/auth')
 }

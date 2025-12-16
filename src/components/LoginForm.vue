@@ -5,6 +5,7 @@ import z from 'zod'
 import api from '@/http/axios'
 import TextboxComponent from './formComponents/TextboxComponent.vue'
 import { loginSchema } from '../validationSchmas/loginValdationSchema.js'
+import { auth_apis } from '../http/apis/auth';
 
 const router = useRouter()
 
@@ -52,7 +53,7 @@ const login = async () => {
   }
 
   try {
-    const { data } = await api.post('login', form_data.value)
+    const { data } = await api.post(auth_apis.login, form_data.value, { withCredentials: true })
     localStorage.setItem('auth_token', data.data.token)
     localStorage.setItem('user_name', data.data.user_name)
     localStorage.setItem('email', data.data.email)

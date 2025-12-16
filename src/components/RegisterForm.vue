@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 import z from 'zod'
 import api from '@/http/axios'
 import TextboxComponent from './formComponents/TextboxComponent.vue'
 import { registrationSchema } from '../validationSchmas/registrationValidationSchema.js'
+import { auth_apis } from '../http/apis/auth';
 
 const router = useRouter()
 
@@ -40,7 +41,7 @@ const validatedField = (field_name) => {
 
 }
 
-const login = async () => {
+const register = async () => {
   
   const result = registrationSchema.safeParse(form_data.value);
   errors.value = {};
@@ -61,7 +62,7 @@ const login = async () => {
       password: form_data.value.password
     }
 
-    const { data } = await api.post('register', req_data)
+    const { data } = await api.post(auth_apis.register, req_data)
     localStorage.setItem('auth_token', data.data.token)
     localStorage.setItem('user_name', data.data.user_name)
     localStorage.setItem('email', data.data.email)
@@ -83,7 +84,7 @@ const login = async () => {
     <p class="text-2xl font-semibold">Create account</p>
     <p class="text-lg text-gray-400 mb-5">Join our community and start sharing</p>
     <p v-if="server_error" class="p-3 text-center border border-red-500 bg-red-300/30 mb-5 text-red-500 rounded-lg">{{ server_error }}</p>
-    <form @submit.prevent="login" class="flex flex-col gap-3">
+    <form @submit.prevent="register" class="flex flex-col gap-3">
       <TextboxComponent v-model="form_data.user_name" @blur="validatedField('user_name')" label="Username" name="username" type="text" placeholder="Choose a username" :error_message="errors.user_name" />
       <TextboxComponent v-model="form_data.email" @blur="validatedField('email')" label="Email" name="email" type="email" placeholder="Enter your email" :error_message="errors.email" />
       <TextboxComponent v-model="form_data.password" @blur="validatedField('password')" label="Password" type="password" placeholder="Enter your password" :error_message="errors.password" />
