@@ -15,9 +15,8 @@ const user_info = {
 }
 
 const clicked = async () => {
-  console.log('object')
   const { data } = await api.get('http://localhost:5174/api/profile', { withCredentials: true })
-  console.log(data);
+  console.log('-----', data);
 }
 </script>
 

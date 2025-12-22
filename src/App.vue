@@ -1,4 +1,9 @@
-<script setup></script>
+<script setup>
+import { onMounted } from 'vue'
+import { useAuthStore } from '@/stores/auth.js'
+
+const auth_store = useAuthStore()
+</script>
 
 <template>
   <!-- <h1>You did it!</h1>

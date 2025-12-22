@@ -88,7 +88,6 @@ const register = async () => {
       <TextboxComponent v-model="form_data.user_name" @blur="validatedField('user_name')" label="Username" name="username" type="text" placeholder="Choose a username" :error_message="errors.user_name" />
       <TextboxComponent v-model="form_data.email" @blur="validatedField('email')" label="Email" name="email" type="email" placeholder="Enter your email" :error_message="errors.email" />
       <TextboxComponent v-model="form_data.password" @blur="validatedField('password')" label="Password" type="password" placeholder="Enter your password" :error_message="errors.password" />
-      <TextboxComponent v-model="form_data.profile_pic_url" @blur="validatedField('profile_pic_url')" label="Profile Picture URL(optional)" type="text" placeholder="https://example.com/your-photo.jpg" :error_message="errors.profile_pic_url" />
       <button type="submit" class="w-full bg-black p-2 text-white rounded-lg mt-3 cursor-pointer">Create account</button>
     </form>
   </div>
