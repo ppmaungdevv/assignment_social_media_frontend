@@ -1,8 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import api from '@/http/axios'
-import { useRouter } from 'vue-router'
-import { auth_apis } from '@/http/apis/auth'
 import { useAuthStore } from '@/stores/auth.js'
 
 const auth_store = useAuthStore()
@@ -12,44 +9,51 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 // 2. Import the specific icon(s) you need
-import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faBars, faClose } from '@fortawesome/free-solid-svg-icons';
 import { faCircleUser, faUser } from '@fortawesome/free-regular-svg-icons';
 
 // 3. Add the icon to the library LOCALLY
-library.add(faArrowRightFromBracket, faCircleUser, faUser);
+library.add(faArrowRightFromBracket, faCircleUser, faUser, faBars, faClose);
 
-const router = useRouter()
-
-const user_name = ref(localStorage.getItem('user_name'))
+const show_nav_list = ref(false)
 
 const logout = async () => {
-  // const { data } = await api.post(auth_apis.logout)
-  // localStorage.clear()
-  // await router.push('/auth')
   await auth_store.handleLogout()
 }
 </script>
 
 
 <template>
-  <nav class="w-full shadow-2xl p-3 text-lg">
-    <div class="w-2/3 p-1 flex justify-between mx-auto">
+  <nav class="w-full shadow-2xl md:p-3 text-lg">
+    <div class="w-full md:w-2/3 p-1 hidden md:flex justify-between mx-auto">
       <div class="flex items-center gap-5">
-        <router-link to="/" class="flex items-center gap-2 cursor-pointer py-1 px-2 rounded-lg" exact-active-class="bg-black text-white">
+        <router-link to="/" class="flex capitalize items-center gap-2 cursor-pointer py-1 px-2 rounded-lg" exact-active-class="bg-black text-white">
           home
         </router-link>
-        <router-link to="/profile" class="flex items-center gap-2 cursor-pointer py-1 px-2 rounded-lg" exact-active-class="bg-black text-white">
+        <router-link to="/profile" class="flex capitalize items-center gap-2 cursor-pointer py-1 px-2 rounded-lg" exact-active-class="bg-black text-white">
           <FontAwesomeIcon :icon="['far', 'user']"/> Profile
         </router-link>
       </div>
       <div class="flex gap-3 items-center">
-        <div class="items-center flex cursor-pointer">
-          <FontAwesomeIcon :icon="['far', 'circle-user']" size="2x" />{{ user_name }}
-        </div>
         <div class="items-center flex cursor-pointer"  @click="logout">
             <FontAwesomeIcon :icon="['fas', 'arrow-right-from-bracket']" />
             logout
         </div>
+      </div>
+    </div>
+    <!-- mobile nav -->
+    <div class="md:hidden">
+      <div class="flex w-full px-2 py-3" @click="show_nav_list = !show_nav_list">
+        <FontAwesomeIcon :icon="['fas', 'fa-bars']" class="text-2xl" v-if="!show_nav_list"/>
+        <FontAwesomeIcon :icon="['fas', 'fa-close']" class="text-2xl" v-if="show_nav_list"/>
+      </div>
+      <div :class="{ 'hidden': !show_nav_list }" class="mt-2">
+        <router-link to="/" class="flex capitalize items-center cursor-pointer p-3 md:py-1 md:px-2 md:rounded-lg" exact-active-class="bg-black text-white">
+          home
+        </router-link>
+        <router-link to="/profile" class="flex capitalize items-center cursor-pointer p-3 md:py-1 md:px-2 md:rounded-lg" exact-active-class="bg-black text-white">
+          profile
+        </router-link>
       </div>
     </div>
   </nav>
